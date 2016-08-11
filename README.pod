@@ -1,1 +1,62 @@
 =head1 A Pretty Printer for BSP views
+
+For formatting the code of a BSP view, the ABAP workbench 
+uses a standard formatter 
+(implemented in method C<pretty_print> of class C<CL_O2_CO2_PROCESSOR>). 
+This standard formatter only looks for the I<BSP elements> of the view 
+The output will be aligned according to the tree that is spanned 
+by these BSP elements. All the rest of the view's content is treated
+as literal text, including HTML elements.
+
+This standard behaviour is a general-purpose algorithm 
+which has its justification in the fact that a BSP view can generate
+any output - may it be XML, HTML, JSON, YAML, or any 
+text-based custom format. The standard has to provide an algorithm
+that is agnostic for the concrete content type.
+
+For a BSP view that is used to generate HTML code, the standard
+behaviour is not what we want. Instead, the tree should be spanned
+by both BSP elements and HTML elements. 
+
+Since, as to my knowledge, there is no full-featured HTML parser 
+available in ABAP, I chose to implement such a pretty printer in Perl,
+using the module L<HTML::Parser>. The Perl program is made accessible
+to ABAP as a system command, and used as an alternative to the
+standard formatter by a simple modification described in 
+L<http://bsp.mits.ch/supplements/pretty.htm>.
+
+=head2 Features
+
+=over 12
+
+=item * B<Indentation>
+
+The indentation is performed along the common tree spanned
+by HTML and BSP elements. The indentation depth per level is
+configurable.
+
+Exceptions are I<inline tags> (like C<<i>>) 
+and I<non-closing tags>  (like C<<img>>. The lists of these
+tags are configurable. 
+
+=item * B<Attributes alignment>
+
+Vertically if opening tag is "long enough" (configurable) 
+to do so, or if the opening tag already contains a line break.
+
+=item * B<HTML tags to lower case>
+
+While BSP element names have to be preserved in the given
+case, HTML element names will be transformed to lower case.
+
+=back
+
+=head2 Reference
+
+L<http://bsp.mits.ch/supplements/pretty.htm> (German language)
+
+
+
+=cut
+
+
