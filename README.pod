@@ -22,8 +22,8 @@ Since, as to my knowledge, there is no full-featured HTML parser
 available in ABAP, I chose to implement such a pretty printer in Perl,
 using the module L<HTML::Parser>. The Perl program is made accessible
 to ABAP as a system command, and used as an alternative to the
-standard formatter by a simple modification described in 
-L<http://bsp.mits.ch/supplements/pretty.htm>.
+standard formatter by a simple modification described on 
+L<bsp.mits.ch|https://web.archive.org/web/20210514111304/http://bsp.mits.ch/supplements/pretty.htm>.
 
 =head2 Features
 
@@ -53,7 +53,7 @@ case, HTML element names will be transformed to lower case.
 
 =head2 Reference
 
-L<http://bsp.mits.ch/supplements/pretty.htm> (German language)
+L<Ein Pretty Printer für BSP Views|https://web.archive.org/web/20210514111304/http://bsp.mits.ch/supplements/pretty.htm> (German language)
 
 
 
